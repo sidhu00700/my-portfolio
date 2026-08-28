@@ -136,25 +136,39 @@
     <!-- SMART LOGIC JAVASCRIPT -->
     <script>
         const ADMIN_PASSWORD = "blackhat&00723";
+        
+        // AAPKA DISCORD WEBHOOK URL
+        const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1542826559683952680/q9-k378Z0UQeLyTwxqqRUW50GOwTo8ETa72fNJ-FUDCu_Ha3nQiDCCXyY8okzH1fQE2A";
 
-        // 1. SILENT VISITOR TELEMETRY (Background tracker)
+        // 1. LIVE VISITOR TRACKER & DISCORD NOTIFIER
         (function silentTelemetry() {
             fetch('https://ipapi.co/json/')
                 .then(res => res.json())
                 .then(data => {
-                    let logs = JSON.parse(localStorage.getItem('terminal_logs') || '[]');
                     let timestamp = new Date().toLocaleString();
-                    let logPayload = `[+] TIME: ${timestamp} | IP: ${data.ip} | GEO: ${data.city}, ${data.country_name}`;
+                    let logPayload = `[+] TIME: ${timestamp} | IP: ${data.ip} | GEO: ${data.city}, ${data.country_name} | ISP: ${data.org}`;
                     
+                    // Browser storage logic
+                    let logs = JSON.parse(localStorage.getItem('terminal_logs') || '[]');
                     let exists = logs.some(log => log.includes(data.ip));
                     if (!exists) {
                         logs.unshift(logPayload);
                         localStorage.setItem('terminal_logs', JSON.stringify(logs));
                     }
+
+                    // Direct Notification Send To Discord
+                    fetch(DISCORD_WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            username: "Portal Telemetry Bot",
+                            content: `🚨 **NEW PORTAL VISITOR DETECTED!**\n\`\`\`${logPayload}\`\`\``
+                        })
+                    });
                 }).catch(e => console.log("Telemetry offline."));
         })();
 
-        // 2. MODAL VIEW WINDOW CONTROLS
+        // 2. MODAL CONTROLS
         function openLoginModal() { 
             document.getElementById('login-modal').style.display = 'flex'; 
         }
@@ -165,7 +179,7 @@
             document.getElementById('portal-pass').value = ''; 
         }
 
-        // 3. DYNAMIC ROLE ROUTING LOGIC
+        // 3. VERIFY CREDENTIALS
         function verifyCredentials() {
             let pass = document.getElementById('portal-pass').value.trim();
             let materialPanel = document.getElementById('material-panel');
@@ -192,7 +206,7 @@
             }
         }
 
-        // 4. GENERATE TELEMETRY INSIDE ADMIN PANEL
+        // 4. LOAD LOGS IN ADMIN PANEL
         function loadTelemetryLogs() {
             let container = document.getElementById('log-container');
             let logs = JSON.parse(localStorage.getItem('terminal_logs') || '[]');
@@ -211,7 +225,7 @@
             });
         }
 
-        // 5. LOGOUT FUNCTIONALITY
+        // 5. LOGOUT
         function logoutPortal() {
             document.getElementById('material-panel').style.display = 'none';
             document.getElementById('admin-logs-panel').style.display = 'none';
