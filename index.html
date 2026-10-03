@@ -3,234 +3,846 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AHMED SIDHU | Secured Portal</title>
+    <title>AHMED SHABBIR // ALIAS AHMED SIDHU - ETHICALGUARD PORTFOLIO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            background-color: #0a0a0a;
-            color: #ffffff;
-            font-family: 'Courier New', Courier, monospace;
-            padding: 40px 20px;
+        :root {
+            --bg-dark: #050811;
+            --card-bg: rgba(13, 20, 36, 0.75);
+            --border-cyan: rgba(6, 182, 212, 0.35);
+            --cyan: #06b6d4;
+            --emerald: #10b981;
+            --yellow: #f59e0b;
+            --crimson: #ef4444;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --font-mono: 'Courier New', Courier, monospace;
+        }
+
+        body.light-theme {
+            --bg-dark: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --border-cyan: rgba(6, 182, 212, 0.5);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            overflow-x: hidden;
+            transition: background 0.3s, color 0.3s;
         }
-        .container { max-width: 1000px; margin: 0 auto; }
-        
-        /* Top Navigation Bar */
-        .top-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding-bottom: 15px; margin-bottom: 25px; }
-        h1 { color: #00ff66; margin: 0; font-size: 26px; }
-        .portal-btn { background: #222; border: 1px solid #333; color: #00ff66; padding: 8px 16px; font-family: monospace; cursor: pointer; border-radius: 4px; font-weight: bold; }
-        .portal-btn:hover { background: #00ff66; color: #000; }
 
-        /* Public Profile Style */
-        .public-profile { background-color: #111111; padding: 25px; border: 1px solid #222; border-radius: 6px; margin-bottom: 25px; }
-        h2 { font-size: 18px; color: #ffffff; margin-top: 25px; border-bottom: 1px dashed #333; padding-bottom: 5px; }
-        .hl-green { color: #00ff66; font-weight: bold; text-decoration: underline; }
-        .hl-red { color: #ff3333; font-weight: bold; text-decoration: underline; }
-        .code-block { background-color: #050505; border-left: 3px solid #00ff66; padding: 15px; margin: 15px 0; font-size: 14px; }
-        
-        .links a {
-            color: #00ff66;
+        /* LAYOUT NODE 1: TOP HUD HEADER */
+        .hud-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(5, 8, 17, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-cyan);
+        }
+
+        .logo-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-title {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--cyan);
+            letter-spacing: 1px;
+        }
+
+        .alias-tag {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-item {
+            color: var(--text-main);
             text-decoration: none;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            padding-bottom: 4px;
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+
+        .nav-item.active {
+            color: var(--cyan);
+            border-bottom: 2px solid var(--cyan);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            color: var(--emerald);
+        }
+
+        .status-pulse {
+            width: 8px;
+            height: 8px;
+            background-color: var(--emerald);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--emerald);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        .theme-btn {
+            background: transparent;
+            border: 1px solid var(--border-cyan);
+            color: var(--cyan);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--font-mono);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-block {
+            margin-bottom: 4rem;
+        }
+
+        .section-heading {
+            font-family: var(--font-mono);
+            color: var(--cyan);
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-cyan);
+            padding-bottom: 0.5rem;
+        }
+
+        /* LAYOUT NODE 2 & SECTION 1: HERO & TERMINAL POD */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .console-prompt {
+            font-family: var(--font-mono);
+            color: var(--emerald);
+            font-size: 0.9rem;
+        }
+
+        .typewriter-text {
+            font-size: 2.2rem;
+            color: var(--text-main);
+            margin: 0.5rem 0;
+            font-family: var(--font-mono);
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid var(--cyan);
+            animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--cyan); }
+        }
+
+        .role-subtitle {
+            color: var(--cyan);
+            font-size: 1.1rem;
+            font-family: var(--font-mono);
+            margin-bottom: 1rem;
+        }
+
+        .bio-text {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.25rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--cyan);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 15px var(--cyan);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--cyan);
+            border: 1px solid var(--cyan);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(6, 182, 212, 0.1);
+        }
+
+        .daemon-box {
+            background: rgba(2, 6, 23, 0.9);
+            border: 1px solid var(--border-cyan);
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--emerald);
+            height: 40px;
+            overflow: hidden;
+        }
+
+        /* SECTION 1: UNIX TERMINAL POD */
+        .terminal-pod {
+            background: #020617;
+            border: 1px solid var(--border-cyan);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+        }
+
+        .terminal-bar {
+            background: #0f172a;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-cyan);
+        }
+
+        .window-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .btn-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .close { background: var(--crimson); }
+        .minimize { background: var(--yellow); }
+        .maximize { background: var(--emerald); }
+
+        .terminal-title {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        .terminal-body {
+            padding: 1rem;
+            height: 240px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .terminal-input-row {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: #090d16;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .prompt-str {
+            color: var(--emerald);
+            margin-right: 0.5rem;
+        }
+
+        #terminal-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--cyan);
+            font-family: var(--font-mono);
+            width: 100%;
+        }
+
+        .text-cyan { color: var(--cyan); }
+        .text-yellow { color: var(--yellow); }
+        .text-emerald { color: var(--emerald); }
+        .text-crimson { color: var(--crimson); font-weight: bold; }
+
+        /* LAYOUT NODE 3: SKILLS MATRIX */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-cyan);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .skill-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .skill-item {
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #1e293b;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.3rem;
+        }
+
+        .fill {
+            height: 100%;
+            background: var(--cyan);
+        }
+
+        .threat-card {
+            border-color: rgba(239, 68, 68, 0.4);
+        }
+
+        .threat-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .container-badges {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .badge-icon {
+            background: #1e293b;
+            color: var(--cyan);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* LAYOUT NODE 4: EDUCATION TIMELINE */
+        .timeline {
+            border-left: 2px solid var(--border-cyan);
+            padding-left: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .timeline-item {
+            position: relative;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2.05rem;
+            top: 0.2rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--cyan);
+        }
+
+        .timeline-dot.pulse {
+            box-shadow: 0 0 10px var(--cyan);
+            animation: pulse 2s infinite;
+        }
+
+        .timeline-dot.check {
+            background: var(--emerald);
+        }
+
+        .time-stamp {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--cyan);
+        }
+
+        /* LAYOUT NODE 5: PROJECTS */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-cyan);
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .badge {
             display: inline-block;
-            margin-right: 20px;
-            margin-top: 15px;
-            font-size: 14px;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.7rem;
+            font-family: var(--font-mono);
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            width: fit-content;
         }
-        .links a:hover {
-            text-decoration: underline;
-            color: #ff3333;
+
+        .badge-crimson { background: rgba(239,68,68,0.2); color: var(--crimson); border: 1px solid var(--crimson); }
+        .badge-cyan { background: rgba(6,182,212,0.2); color: var(--cyan); border: 1px solid var(--cyan); }
+
+        .tech-tags {
+            margin: 1rem 0;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
         }
 
-        /* Layout Grid for Dashboards */
-        .dashboard-grid { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
-        .panel { flex: 1; min-width: 300px; background: #111; padding: 25px; border-radius: 6px; }
-        
-        /* Premium Material Panel */
-        #material-panel { display: none; border: 1px solid #00ff66; box-shadow: 0 0 15px rgba(0,255,102,0.05); }
-        #material-panel h3 { color: #00ff66; margin-top: 0; }
-        .course-link { display: block; background: #050505; border-left: 3px solid #00ff66; padding: 12px; margin-bottom: 12px; text-decoration: none; color: #fff; font-size: 14px; }
-        .course-link:hover { background: #161616; color: #00ff66; }
+        .tech-tags span {
+            background: #1e293b;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+        }
 
-        /* Secret Admin Traffic Logs Panel */
-        #admin-logs-panel { display: none; border: 1px solid #ff3333; box-shadow: 0 0 15px rgba(255,51,51,0.05); }
-        #admin-logs-panel h3 { color: #ff3333; margin-top: 0; }
-        .log-entry { background: #050505; padding: 10px; border-left: 3px solid #ff3333; margin-bottom: 10px; font-size: 13px; color: #ff5555; word-break: break-all; }
+        .project-btn {
+            color: var(--cyan);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-        /* Password Modal Popup */
-        #login-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; justify-content: center; align-items: center; }
-        .modal-box { background: #111; border: 1px solid #00ff66; padding: 30px; text-align: center; border-radius: 6px; max-width: 350px; width: 100%; }
-        .modal-box input { background: #000; border: 1px solid #333; color: #00ff66; padding: 10px; text-align: center; margin-bottom: 15px; outline: none; font-family: monospace; width: 80%; font-size: 15px; }
-        .modal-box button { background: #00ff66; color: #000; border: none; padding: 8px 20px; cursor: pointer; font-family: monospace; font-weight: bold; border-radius: 4px; }
-        #login-err { color: #ff3333; font-size: 13px; margin-top: 10px; display: none; }
+        /* LAYOUT NODE 6: CONTACT FORM & FOOTER */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 600px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: #090d16;
+            border: 1px solid var(--border-cyan);
+            border-radius: 6px;
+            color: #fff;
+            font-family: var(--font-mono);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--cyan);
+            box-shadow: 0 0 10px rgba(6,182,212,0.3);
+        }
+
+        .form-group input.error, .form-group textarea.error {
+            border-color: var(--crimson);
+            box-shadow: 0 0 10px rgba(239,68,68,0.5);
+        }
+
+        .hud-footer {
+            border-top: 1px solid var(--border-cyan);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-main);
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--cyan);
+        }
+
+        @media (max-width: 768px) {
+            .hero-grid, .skills-grid, .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- TOP NAVIGATION BAR -->
-        <div class="top-bar">
-            <h1># AHMED SIDHU</h1>
-            <button id="gate-btn" class="portal-btn" onclick="openLoginModal()">[ ENTER PORTAL ]</button>
+    <!-- LAYOUT NODE 1: TOP NAVIGATION HUD HEADER -->
+    <header class="hud-header">
+        <div class="logo-box">
+            <span class="main-title">AHMED SHABBIR</span>
+            <span class="alias-tag">ALIAS // AHMED SIDHU</span>
         </div>
-
-        <!-- 1. PUBLIC TERMINAL PROFILE -->
-        <div class="public-profile">
-            <p>I am a <span class="hl-green">Junior Python Developer</span> currently learning programming foundations, with a core focus and specialized interest in <span class="hl-red">Cybersecurity</span>.</p>
-            <div class="code-block">
-                &gt; Location: Punjab, Pakistan<br>
-                &gt; Track 01: <span class="hl-red">Bug Bounty Reconnaissance</span><br>
-                &gt; Track 02: <span class="hl-green">Network Vulnerability Scanning</span>
+        <nav class="nav-links">
+            <a href="#about" class="nav-item active">01// ABOUT</a>
+            <a href="#skills" class="nav-item">02// SKILLS</a>
+            <a href="#education" class="nav-item">03// EDUCATION</a>
+            <a href="#projects" class="nav-item">04// PROJECTS</a>
+            <a href="#contact" class="nav-item">05// CONTACT</a>
+        </nav>
+        <div class="header-controls">
+            <div class="system-status">
+                <span class="status-pulse"></span>
+                <span>SYSTEM CORE ONLINE // VERSION 2026.4</span>
             </div>
-            
-            <div class="links">
-                <a href="https://github.com/ahmedsidhu97-dotcom" target="_blank">[ GitHub Profile ]</a>
-                <a href="https://www.linkedin.com/in/ahmed-sidhu-5904913aa" target="_blank">[ LinkedIn Profile ]</a>
-            </div>
+            <button class="theme-btn" id="theme-toggle"><i class="fa-solid fa-moon"></i></button>
         </div>
+    </header>
 
-        <!-- 2. ROLE-BASED DASHBOARD GRID -->
-        <div class="dashboard-grid">
-            
-            <!-- A. PREMIUM COURSE MATERIAL PANEL -->
-            <div id="material-panel" class="panel">
-                <h3>[🔓 PREMIUM LEARNING GATEWAY]</h3>
-                <p style="color: #888; font-size: 13px; margin-bottom: 15px;">Access granted to elite tech educational tracks:</p>
-                
-                <a href="https://youtube.com" target="_blank" class="course-link">
-                    <strong>🚀 Azad Chaiwala</strong> - Cybersecurity Full Course Training Link
-                </a>
-                <a href="https://youtube.com" target="_blank" class="course-link">
-                    <strong>💻 CodeWithHarry</strong> - 100 Days of Code (Python Core Foundations)
-                </a>
-                <a href="https://youtube.com" target="_blank" class="course-link">
-                    <strong>🌐 NetworkChuck</strong> - Free CCNA/Networking Full Course Link
-                </a>
-                
-                <button class="portal-btn" style="color:#ff3333; border-color:#ff3333; margin-top: 10px;" onclick="logoutPortal()">[ LOCK TERMINAL ]</button>
-            </div>
+    <main class="container">
 
-            <!-- B. SECRET ADMIN TRAFFIC LOGS PANEL -->
-            <div id="admin-logs-panel" class="panel">
-                <h3>[⚙️ ROOT_CONTROL: VISITOR NETWORK LOGS]</h3>
-                <p style="color: #888; font-size: 13px; margin-bottom: 15px;">Telemetry data logs recorded from external endpoints:</p>
-                <div id="log-container">
-                    <!-- Live Tracking Logs load here -->
+        <!-- LAYOUT NODE 2 & SECTION 1: HERO & TERMINAL POD -->
+        <section id="about" class="hero-grid">
+            <div class="hero-text">
+                <p class="console-prompt">&gt; INITIALIZING IDENTITY TOKEN...</p>
+                <h1 class="typewriter-text">Hi, I am Ahmed Sidhu</h1>
+                <h2 class="role-subtitle">&gt; Full-Stack Web Developer & Cybersecurity Practitioner</h2>
+                <p class="bio-text">
+                    11th Grade Science student (ICS Physics track) merging backend web application development with core offensive/defensive cybersecurity skills.
+                </p>
+                <div class="cta-group">
+                    <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-terminal"></i> Execute Scans / View Projects</a>
+                    <a href="#contact" class="btn btn-secondary"><i class="fa-solid fa-network-wired"></i> Connect Security Socket</a>
+                </div>
+                <!-- TELEMETRY LOG STREAM DAEMON -->
+                <div class="daemon-box" id="daemon-stream">
+                    [TELEMETRY DAEMON]: INITIALIZING SERVER LOG STREAM...
                 </div>
             </div>
 
-        </div>
-    </div>
+            <!-- SECTION 1: STANDALONE UNIX INTERFACE POD -->
+            <div class="terminal-pod">
+                <div class="terminal-bar">
+                    <div class="window-buttons">
+                        <span class="btn-dot close"></span>
+                        <span class="btn-dot minimize"></span>
+                        <span class="btn-dot maximize"></span>
+                    </div>
+                    <span class="terminal-title">guest@ahmedsidhu:~# (UNIX POD)</span>
+                </div>
+                <div class="terminal-body" id="terminal-body">
+                    <div class="terminal-line text-cyan">SYSTEM CORE ONLINE // VERSION 2026.4</div>
+                    <div class="terminal-line text-yellow">Type 'help' for available platform commands.</div>
+                </div>
+                <div class="terminal-input-row">
+                    <span class="prompt-str">guest@ahmedsidhu:~#</span>
+                    <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" autofocus>
+                </div>
+            </div>
+        </section>
 
-    <!-- ENCRYPTED LOGIN MODAL -->
-    <div id="login-modal">
-        <div class="modal-box" id="modal-container">
-            <h3 id="modal-title" style="color: #00ff66; margin-top: 0;">PORTAL GATEWAY</h3>
-            <p style="color:#888; font-size:11px; margin-top: -10px;">Enter your personal password to unlock courses.<br>Enter admin password for control panel.</p>
-            <input type="password" id="portal-pass" placeholder="Enter Password..."><br>
-            <button onclick="verifyCredentials()">DECRYPT</button>
-            <button onclick="closeLoginModal()" style="background:#222; color:#888; border: 1px solid #333; margin-left: 10px;">CANCEL</button>
-            <div id="login-err">[-] WRONG ACTION DETECTED.</div>
-        </div>
-    </div>
+        <!-- LAYOUT NODE 3: TELEMETRY SKILLS MATRIX -->
+        <section id="skills" class="section-block">
+            <h2 class="section-heading">02// TELEMETRY SKILLS MATRIX</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3><i class="fa-solid fa-code text-cyan"></i> Application Engine Languages</h3>
+                    <div class="skill-item">
+                        <span>Python</span> <span style="float: right;" class="text-cyan">95%</span>
+                        <div class="progress-bar"><div class="fill" style="width: 95%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span>JavaScript / TypeScript</span> <span style="float: right;" class="text-cyan">88%</span>
+                        <div class="progress-bar"><div class="fill" style="width: 88%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Java</span> <span style="float: right;" class="text-cyan">75%</span>
+                        <div class="progress-bar"><div class="fill" style="width: 75%;"></div></div>
+                    </div>
 
-    <!-- SMART LOGIC JAVASCRIPT -->
+                    <div class="container-badges">
+                        <span class="badge-icon"><i class="fa-brands fa-git-alt"></i> Git</span>
+                        <span class="badge-icon"><i class="fa-brands fa-github"></i> GitHub</span>
+                        <span class="badge-icon"><i class="fa-brands fa-linux"></i> Linux Shell</span>
+                        <span class="badge-icon"><i class="fa-solid fa-gears"></i> REST APIs</span>
+                    </div>
+                </div>
+
+                <div class="skill-card threat-card">
+                    <h3><i class="fa-solid fa-shield-halved text-crimson"></i> Defensive Security Threat Vector Cards</h3>
+                    <ul class="threat-list">
+                        <li><i class="fa-solid fa-bug text-crimson"></i> OWASP Injection Defenses & Input Sanitization</li>
+                        <li><i class="fa-solid fa-network-wired text-crimson"></i> Network Scan Mapping & Reconnaissance</li>
+                        <li><i class="fa-solid fa-lock text-crimson"></i> Linux Hardening & Audit Telemetry</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- LAYOUT NODE 4: CHRONOLOGICAL PATHWAY TRACK -->
+        <section id="education" class="section-block">
+            <h2 class="section-heading">03// CHRONOLOGICAL PATHWAY TRACK</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot pulse"></div>
+                    <div class="timeline-content">
+                        <span class="time-stamp">2025 - PRESENT</span>
+                        <h3>Current Intermediate Enrollment (11th Grade - ICS)</h3>
+                        <p>Focusing on analytical physics, programming logic, calculus, and advanced cybersecurity tracks.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot check"></div>
+                    <div class="timeline-content">
+                        <span class="time-stamp">COMPLETED (2026)</span>
+                        <h3>Matriculation Validation Certification <i class="fa-solid fa-circle-check text-emerald"></i></h3>
+                        <p>Completed Science track matriculation with strong distinction in Mathematics and Computer Science.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LAYOUT NODE 5: REPOSITORY SHOWCASE -->
+        <section id="projects" class="section-block">
+            <h2 class="section-heading">04// REPOSITORY SHOWCASE</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div>
+                        <div class="badge badge-crimson">Enterprise Vulnerability Asset</div>
+                        <h3>EthicalGuard Scanner Module</h3>
+                        <p class="bio-text">Custom 100% native Python decoupled worker scanning architecture built for fast web vulnerability auditing.</p>
+                        <div class="tech-tags">
+                            <span>FastAPI Core</span><span>Celery Async Workers</span><span>Next.js Frontend</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com" target="_blank" class="project-btn"><i class="fa-brands fa-github"></i> Inspect Shell Source</a>
+                </div>
+
+                <div class="project-card">
+                    <div>
+                        <div class="badge badge-cyan">Public Network Utility</div>
+                        <h3>Autonomous Video Downloader</h3>
+                        <p class="bio-text">High-performance media extraction tool utilizing custom Python yt-dlp wrappers and proxy-routing logic.</p>
+                        <div class="tech-tags">
+                            <span>Python</span><span>yt-dlp</span><span>REST API</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com" target="_blank" class="project-btn"><i class="fa-brands fa-github"></i> Inspect Shell Source</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- LAYOUT NODE 6: SECURE FORM SOCKET -->
+        <section id="contact" class="section-block">
+            <h2 class="section-heading">05// SECURE FORM SOCKET</h2>
+            <form id="contact-form" class="contact-form">
+                <div class="form-group">
+                    <input type="text" id="user_name" placeholder="YOUR IDENTITY / NAME">
+                </div>
+                <div class="form-group">
+                    <input type="email" id="user_email" placeholder="YOUR EMAIL SOCKET">
+                </div>
+                <div class="form-group">
+                    <textarea id="user_msg" rows="4" placeholder="TRANSMIT PAYLOAD PACKET MESSAGE..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-paper-plane"></i> TRANSMIT PAYLOAD PACKET
+                </button>
+            </form>
+        </section>
+
+    </main>
+
+    <!-- FOOTER HUB -->
+    <footer class="hud-footer">
+        <p>&copy; 2026 AHMED SHABBIR (ALIAS // AHMED SIDHU) // ALL RIGHTS RESERVED</p>
+        <div class="social-links">
+            <a href="https://github.com" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a href="https://linkedin.com" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+        </div>
+    </footer>
+
+    <!-- LOGIC SCRIPT ENGINE -->
     <script>
-        const ADMIN_PASSWORD = "blackhat&00723";
-        
-        // AAPKA DISCORD WEBHOOK URL
-        const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1542826559683952680/q9-k378Z0UQeLyTwxqqRUW50GOwTo8ETa72fNJ-FUDCu_Ha3nQiDCCXyY8okzH1fQE2A";
+        document.addEventListener('DOMContentLoaded', () => {
+            const terminalInput = document.getElementById('terminal-input');
+            const terminalBody = document.getElementById('terminal-body');
+            const daemonStream = document.getElementById('daemon-stream');
+            const themeToggle = document.getElementById('theme-toggle');
 
-        // 1. LIVE VISITOR TRACKER & DISCORD NOTIFIER
-        (function silentTelemetry() {
-            fetch('https://ipapi.co/json/')
-                .then(res => res.json())
-                .then(data => {
-                    let timestamp = new Date().toLocaleString();
-                    let logPayload = `[+] TIME: ${timestamp} | IP: ${data.ip} | GEO: ${data.city}, ${data.country_name} | ISP: ${data.org}`;
+            // SECTION 1: TERMINAL PARSING ENGINE
+            terminalInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    const command = terminalInput.value.trim().toLowerCase();
+                    appendLine(`guest@ahmedsidhu:~# ${command}`, 'text-emerald');
                     
-                    // Browser storage logic
-                    let logs = JSON.parse(localStorage.getItem('terminal_logs') || '[]');
-                    let exists = logs.some(log => log.includes(data.ip));
-                    if (!exists) {
-                        logs.unshift(logPayload);
-                        localStorage.setItem('terminal_logs', JSON.stringify(logs));
-                    }
-
-                    // Direct Notification Send To Discord
-                    fetch(DISCORD_WEBHOOK_URL, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            username: "Portal Telemetry Bot",
-                            content: `🚨 **NEW PORTAL VISITOR DETECTED!**\n\`\`\`${logPayload}\`\`\``
-                        })
-                    });
-                }).catch(e => console.log("Telemetry offline."));
-        })();
-
-        // 2. MODAL CONTROLS
-        function openLoginModal() { 
-            document.getElementById('login-modal').style.display = 'flex'; 
-        }
-        
-        function closeLoginModal() { 
-            document.getElementById('login-modal').style.display = 'none'; 
-            document.getElementById('login-err').style.display = 'none'; 
-            document.getElementById('portal-pass').value = ''; 
-        }
-
-        // 3. VERIFY CREDENTIALS
-        function verifyCredentials() {
-            let pass = document.getElementById('portal-pass').value.trim();
-            let materialPanel = document.getElementById('material-panel');
-            let adminLogsPanel = document.getElementById('admin-logs-panel');
-            let gateBtn = document.getElementById('gate-btn');
-
-            if (pass === "") {
-                document.getElementById('login-err').innerText = "[-] PASSWORD CANNOT BE EMPTY.";
-                document.getElementById('login-err').style.display = 'block';
-                return;
-            }
-
-            if (pass === ADMIN_PASSWORD) {
-                closeLoginModal();
-                materialPanel.style.display = 'block';
-                adminLogsPanel.style.display = 'block'; 
-                gateBtn.innerText = "[ ROOT_ADMIN ACTIVE ]";
-                loadTelemetryLogs();
-            } else {
-                closeLoginModal();
-                materialPanel.style.display = 'block';
-                adminLogsPanel.style.display = 'none';
-                gateBtn.innerText = "[ USER_MEMBER ACTIVE ]";
-            }
-        }
-
-        // 4. LOAD LOGS IN ADMIN PANEL
-        function loadTelemetryLogs() {
-            let container = document.getElementById('log-container');
-            let logs = JSON.parse(localStorage.getItem('terminal_logs') || '[]');
-            
-            if (logs.length === 0) {
-                container.innerHTML = '<div class="log-entry">[-] No external endpoint traffic logged yet.</div>';
-                return;
-            }
-
-            container.innerHTML = '';
-            logs.forEach(log => {
-                let div = document.createElement('div');
-                div.className = 'log-entry';
-                div.innerText = log;
-                container.appendChild(div);
+                    processCommand(command);
+                    
+                    terminalInput.value = '';
+                    terminalBody.scrollTop = terminalBody.scrollHeight;
+                }
             });
-        }
 
-        // 5. LOGOUT
-        function logoutPortal() {
-            document.getElementById('material-panel').style.display = 'none';
-            document.getElementById('admin-logs-panel').style.display = 'none';
-            document.getElementById('gate-btn').innerText = "[ ENTER PORTAL ]";
-        }
+            function appendLine(text, className = '') {
+                const div = document.createElement('div');
+                div.className = `terminal-line ${className}`;
+                div.innerHTML = text;
+                terminalBody.appendChild(div);
+            }
+
+            function processCommand(cmd) {
+                switch (cmd) {
+                    case 'help':
+                        appendLine('--- AVAILABLE PLATFORM OPERATIONS ---', 'text-emerald');
+                        appendLine('<span class="text-cyan">about</span>    : View identity token profile & engineering tracks');
+                        appendLine('<span class="text-cyan">skills</span>   : Output development tools & security metrics');
+                        appendLine('<span class="text-cyan">sysinfo</span>  : Check platform runtime telemetry');
+                        appendLine('<span class="text-cyan">clear</span>    : Purge historic screen buffer');
+                        break;
+                    case 'about':
+                        appendLine('IDENTITY: AHMED SHABBIR (ALIAS: AHMED SIDHU)');
+                        appendLine('STATUS: Active 11th Grade ICS Physics Track');
+                        appendLine('FOCUS: Web Application Development & Defensive Security');
+                        break;
+                    case 'skills':
+                        appendLine('[LANGUAGES] Python (95%), JavaScript/TypeScript, Java', 'text-cyan');
+                        appendLine('[DEFENSIVE SECURITY] OWASP Injection Defenses, Network Scan Mapping', 'text-crimson');
+                        break;
+                    case 'sysinfo':
+                        appendLine('CORE_ENGINE: EthicalGuard / Vortex Vault Engine v2026.4', 'text-cyan');
+                        appendLine('RUNTIME_NODE: Native Web Console Engine', 'text-emerald');
+                        break;
+                    case 'clear':
+                        terminalBody.innerHTML = '';
+                        break;
+                    case '':
+                        break;
+                    default:
+                        appendLine(`ERR // Parameter Not Indexed: '${cmd}'. Type 'help' for executable commands.`, 'text-crimson');
+                }
+            }
+
+            // BACKGROUND DAEMON LOG STREAM
+            const daemonFlags = [
+                "[FLAG]: SCANNING SUBNET 192.168.1.0/24...",
+                "[DAEMON]: HTTP 200 OK - API GATEWAY ACTIVE",
+                "[SECURITY]: NO UNHANDLED INJECTIONS DETECTED",
+                "[TELEMETRY]: MEMORY BUFFER STABLE @ 12%"
+            ];
+            let flagIndex = 0;
+            setInterval(() => {
+                daemonStream.innerText = `[TELEMETRY DAEMON]: ${daemonFlags[flagIndex]}`;
+                flagIndex = (flagIndex + 1) % daemonFlags.length;
+            }, 3500);
+
+            // THEME SWITCHER
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('light-theme');
+            });
+
+            // CONTACT FORM VALIDATION INTERCEPTOR
+            const contactForm = document.getElementById('contact-form');
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('user_name');
+                const email = document.getElementById('user_email');
+                const msg = document.getElementById('user_msg');
+                let valid = true;
+
+                [name, email, msg].forEach(input => {
+                    if (!input.value.trim()) {
+                        input.classList.add('error');
+                        valid = false;
+                    } else {
+                        input.classList.remove('error');
+                    }
+                });
+
+                if (valid) {
+                    alert('PAYLOAD PACKET TRANSMITTED SUCCESSFULLY!');
+                    contactForm.reset();
+                }
+            });
+        });
     </script>
 </body>
 </html>
