@@ -3,331 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AHMED SHABBIR //  AHMED SIDHU - SAAS DASHBOARD</title>
-    <!-- Tailwind CSS Engine CDN -->
+    <title>AHMED SHABBIR // PORTFOLIO</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        brandDark: '#0B0F19',
-                        brandCard: '#121826',
-                        brandBorder: '#222F43',
-                        neonCyan: '#00F0FF',
-                        alertCrimson: '#FF4444',
+                        brandDark: '#0b0c10',
+                        accentPurple: '#8b5cf6',
+                        accentBlue: '#3b82f6',
+                        glossyBorder: 'rgba(255, 255, 255, 0.12)',
+                        glossyBg: 'rgba(15, 23, 42, 0.65)'
                     }
                 }
             }
         }
     </script>
-    <!-- FontAwesome Logos & Icons -->
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .glass-card {
-            background: rgba(18, 24, 38, 0.75);
-            backdrop-filter: blur(16px);
-            border: 1px solid #222F43;
-        }
-        .hero-bg-blur {
-            background-image: linear-gradient(to right, rgba(11, 15, 25, 0.95), rgba(11, 15, 25, 0.75)), url('Gemini_Generated_Image_ (1).png');
+        /* Full Background Blurred Photo Overlay */
+        body {
+            background: linear-gradient(to bottom, rgba(11, 12, 16, 0.88), rgba(15, 23, 42, 0.92)), url('Gemini_Generated_Image_\ \(1\)_2.png');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
+            color: #f8fafc;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
-        @keyframes pulse-cyan {
-            0%, 100% { box-shadow: 0 0 15px rgba(0, 240, 255, 0.3); }
-            50% { box-shadow: 0 0 30px rgba(0, 240, 255, 0.8); }
+
+        /* High-End Glassmorphism Cards */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
-        .glow-cyan { animation: pulse-cyan 3s infinite; }
+
+        /* Glowing Purple Text Accent */
+        .text-gradient {
+            background: linear-gradient(135deg, #a855f7 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-gradient:hover {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Circular Hero Image Box */
+        .hero-img-circle {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background-image: url('Gemini_Generated_Image_\ \(1\)_2.png');
+            background-size: cover;
+            background-position: center top;
+            border: 4px solid rgba(139, 92, 246, 0.4);
+            box-shadow: 0 0 35px rgba(139, 92, 246, 0.3);
+        }
     </style>
 </head>
-<body class="bg-brandDark text-slate-100 font-sans selection:bg-neonCyan selection:text-black">
+<body class="min-h-screen selection:bg-purple-500 selection:text-white">
 
-    <!-- 1. HEADER HUD NAVBAR -->
-    <header class="sticky top-0 z-50 glass-card border-b border-brandBorder px-6 py-4 flex justify-between items-center">
-        <div class="flex flex-col">
-            <span class="font-extrabold text-xl text-neonCyan tracking-wider font-mono">AHMED SHABBIR</span>
-            <span class="text-xs text-slate-400 font-mono tracking-widest"> // AHMED SIDHU</span>
+    <!-- HEADER HUD NAVBAR -->
+    <header class="sticky top-0 z-50 glass-card px-8 py-4 flex justify-between items-center border-b border-white/10">
+        <div class="flex items-center space-x-2">
+            <span class="text-2xl font-extrabold tracking-wide text-gradient">Portfolio</span>
         </div>
         
-        <nav class="hidden md:flex space-x-6 text-xs font-mono tracking-widest">
-            <a href="#about" class="hover:text-neonCyan transition">01// ABOUT</a>
-            <a href="#skills" class="hover:text-neonCyan transition">02// SKILLS</a>
-            <a href="#education" class="hover:text-neonCyan transition">03// EDUCATION</a>
-            <a href="#projects" class="hover:text-neonCyan transition">04// PROJECTS</a>
-            <a href="#terminal-section" class="hover:text-neonCyan transition">05// TERMINAL</a>
-            <a href="#socials" class="hover:text-neonCyan transition">06// CONNECT</a>
+        <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
+            <a href="#home" class="hover:text-purple-400 transition">Home</a>
+            <a href="#about" class="hover:text-purple-400 transition">About</a>
+            <a href="#skills" class="hover:text-purple-400 transition">Skills</a>
+            <a href="#projects" class="hover:text-purple-400 transition">Projects</a>
+            <a href="#connect" class="hover:text-purple-400 transition">Contact</a>
         </nav>
-
-        <div class="flex items-center space-x-4">
-            <div class="flex items-center space-x-2 text-xs font-mono text-emerald-400">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                <span class="hidden sm:inline">/ v2026.4</span>
-            </div>
-        </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-8 space-y-16">
+    <main class="max-w-6xl mx-auto px-6 py-12 space-y-24">
 
-        <!-- 2. HERO MODULE WITH BLURRY BACKGROUND PHOTO -->
-        <section id="about" class="relative rounded-2xl glass-card overflow-hidden border border-brandBorder p-8 md:p-12 hero-bg-blur">
-            <div class="max-w-3xl space-y-6">
-                <div class="inline-block px-3 py-1 rounded-full bg-neonCyan/10 border border-neonCyan/30 text-neonCyan font-mono text-xs tracking-wider">
-                    &gt; CYBERSECURITY RESEARCHER & JUNIOR DEVOLPER
-                </div>
-                
-                <h1 id="typewriter" class="text-3xl md:text-5xl font-extrabold font-mono text-white tracking-tight min-h-[60px]">
-                    <!-- Typewriter Text Injected Here -->
+        <!-- HERO SECTION (REFERENCE DESIGN MATCH) -->
+        <section id="home" class="flex flex-col-reverse md:flex-row items-center justify-between gap-12 pt-8">
+            <div class="flex-1 space-y-6">
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">
+                    Hi, I'm <span class="text-gradient">Ahmed Sidhu</span>
                 </h1>
-                
-                <!-- HACKER CONSOLE SHARP TEXT TYPOGRAPHY -->
-                <p class="font-mono text-cyan-400 tracking-wide font-medium leading-relaxed text-sm md:text-base bg-brandDark/80 p-6 rounded-xl border border-brandBorder">
-                    I am a passionate JUNIOR Developer and Cybersecurity Practitioner tracking systems core optimization and advanced network automation modules. Currently completing my Intermediate Science & Technology track (11th Grade), I build lightweight, dynamic web applications utilizing decoupled microservices and reactive interfaces. Specialized in continuous deployment cycles, modular logic integration, and data telemetry management.
+                <h2 class="text-xl md:text-2xl font-semibold text-slate-200">
+                    Full-Stack Developer & Cybersecurity Practitioner
+                </h2>
+                <p class="text-slate-300 text-base leading-relaxed max-w-xl">
+                    I build exceptional digital experiences that are fast, secure, and visually appealing. Specialized in modern web architectures, decoupled microservices, and continuous automated security protocols.
                 </p>
-
-                <!-- TELEMETRY CONTINUOUS LIVE DUMP -->
-                <div class="glass-card p-4 rounded-lg font-mono text-xs text-slate-400 flex items-center justify-between border-l-4 border-neonCyan">
-                    <span id="live-telemetry-log" class="text-neonCyan">INITIALIZING TELEMETRY BUS...</span>
-                    <span class="text-slate-500">[REAL-TIME LOGS]</span>
+                
+                <div class="flex items-center space-x-4 pt-2">
+                    <a href="#projects" class="btn-gradient px-6 py-3 rounded-full text-white font-medium text-sm">View Work</a>
+                    <a href="#connect" class="px-6 py-3 rounded-full border border-purple-500/40 hover:bg-purple-500/10 text-purple-300 font-medium text-sm transition">Connect</a>
                 </div>
+
+                <!-- SOCIAL LOGO ICONS -->
+                <div class="flex items-center space-x-4 pt-4">
+                    <a href="https://github.com/sidhu00700" target="_blank" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-slate-300 hover:text-purple-400 hover:border-purple-500/50 transition">
+                        <i class="fa-brands fa-github text-lg"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/ahmed-sidhu-5904913aa" target="_blank" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-slate-300 hover:text-purple-400 hover:border-purple-500/50 transition">
+                        <i class="fa-brands fa-linkedin-in text-lg"></i>
+                    </a>
+                    <a href="https://www.facebook.com/Ahmedsidhu001" target="_blank" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-slate-300 hover:text-purple-400 hover:border-purple-500/50 transition">
+                        <i class="fa-brands fa-facebook-f text-lg"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CIRCULAR PHOTO FRAME -->
+            <div class="flex justify-center items-center">
+                <div class="hero-img-circle"></div>
             </div>
         </section>
 
-        <!-- 3. SKILL TELEMETRY MATRIX (CIRCULAR GAUGES & BADGES) -->
+        <!-- ABOUT SECTION -->
+        <section id="about" class="space-y-6">
+            <h2 class="text-2xl font-bold text-gradient inline-block border-b border-purple-500/30 pb-2">About Me</h2>
+            <div class="glass-card p-8 rounded-2xl space-y-4">
+                <p class="text-slate-200 text-base leading-relaxed">
+                    I am a passionate Full-Stack Developer and Cybersecurity Practitioner tracking systems core optimization and advanced network automation modules. Currently completing my Intermediate Science & Technology track (11th Grade), I build lightweight, dynamic web applications utilizing decoupled microservices and reactive interfaces. Specialized in continuous deployment cycles, modular logic integration, and data telemetry management.
+                </p>
+            </div>
+        </section>
+
+        <!-- SKILLS MATRIX SECTION -->
         <section id="skills" class="space-y-6">
-            <h2 class="text-lg font-mono text-neonCyan tracking-widest border-b border-brandBorder pb-2">02// SKILL TELEMETRY MATRIX</h2>
+            <h2 class="text-2xl font-bold text-gradient inline-block border-b border-purple-500/30 pb-2">Technical Skills</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Circular Gauge 1 -->
-                <div class="glass-card p-6 rounded-xl border border-brandBorder flex flex-col items-center justify-center space-y-4">
-                    <div class="relative w-28 h-28 flex items-center justify-center">
-                        <svg class="w-full h-full transform -rotate-90">
-                            <circle cx="56" cy="56" r="45" stroke="#222F43" stroke-width="8" fill="transparent"/>
-                            <circle cx="56" cy="56" r="45" stroke="#00F0FF" stroke-width="8" fill="transparent" stroke-dasharray="283" stroke-dashoffset="15"/>
-                        </svg>
-                        <span class="absolute font-mono text-xl font-bold text-neonCyan">95%</span>
-                    </div>
-                    <span class="font-mono text-sm tracking-wide text-slate-300">Python Application Core</span>
+                <div class="glass-card p-6 rounded-2xl flex flex-col items-center space-y-3">
+                    <i class="fa-brands fa-python text-4xl text-purple-400"></i>
+                    <h3 class="font-semibold text-lg">Python Core</h3>
+                    <p class="text-xs text-slate-400 text-center">Backend systems, API wrappers, automation scripts.</p>
                 </div>
-
-                <!-- Circular Gauge 2 -->
-                <div class="glass-card p-6 rounded-xl border border-brandBorder flex flex-col items-center justify-center space-y-4">
-                    <div class="relative w-28 h-28 flex items-center justify-center">
-                        <svg class="w-full h-full transform -rotate-90">
-                            <circle cx="56" cy="56" r="45" stroke="#222F43" stroke-width="8" fill="transparent"/>
-                            <circle cx="56" cy="56" r="45" stroke="#00F0FF" stroke-width="8" fill="transparent" stroke-dasharray="283" stroke-dashoffset="35"/>
-                        </svg>
-                        <span class="absolute font-mono text-xl font-bold text-neonCyan">88%</span>
-                    </div>
-                    <span class="font-mono text-sm tracking-wide text-slate-300">Full-Stack / React Engine</span>
+                <div class="glass-card p-6 rounded-2xl flex flex-col items-center space-y-3">
+                    <i class="fa-brands fa-react text-4xl text-blue-400"></i>
+                    <h3 class="font-semibold text-lg">Frontend Engineering</h3>
+                    <p class="text-xs text-slate-400 text-center">Responsive, reactive, and glossy user interfaces.</p>
                 </div>
-
-                <!-- Circular Gauge 3 -->
-                <div class="glass-card p-6 rounded-xl border border-brandBorder flex flex-col items-center justify-center space-y-4">
-                    <div class="relative w-28 h-28 flex items-center justify-center">
-                        <svg class="w-full h-full transform -rotate-90">
-                            <circle cx="56" cy="56" r="45" stroke="#222F43" stroke-width="8" fill="transparent"/>
-                            <circle cx="56" cy="56" r="45" stroke="#FF4444" stroke-width="8" fill="transparent" stroke-dasharray="283" stroke-dashoffset="50"/>
-                        </svg>
-                        <span class="absolute font-mono text-xl font-bold text-alertCrimson">82%</span>
-                    </div>
-                    <span class="font-mono text-sm tracking-wide text-slate-300">Network Scan Security</span>
-                </div>
-            </div>
-
-            <!-- CONTAINER ENVIRONMENT BADGES -->
-            <div class="glass-card p-6 rounded-xl border border-brandBorder flex flex-wrap gap-4 items-center justify-center">
-                <span class="px-4 py-2 rounded-lg bg-slate-900 border border-brandBorder text-xs font-mono text-neonCyan flex items-center gap-2"><i class="fa-brands fa-python text-base"></i> Python</span>
-                <span class="px-4 py-2 rounded-lg bg-slate-900 border border-brandBorder text-xs font-mono text-neonCyan flex items-center gap-2"><i class="fa-brands fa-react text-base"></i> React</span>
-                <span class="px-4 py-2 rounded-lg bg-slate-900 border border-brandBorder text-xs font-mono text-neonCyan flex items-center gap-2"><i class="fa-brands fa-js text-base"></i> JavaScript</span>
-                <span class="px-4 py-2 rounded-lg bg-slate-900 border border-brandBorder text-xs font-mono text-neonCyan flex items-center gap-2"><i class="fa-brands fa-java text-base"></i> Java</span>
-                <span class="px-4 py-2 rounded-lg bg-slate-900 border border-brandBorder text-xs font-mono text-neonCyan flex items-center gap-2"><i class="fa-brands fa-git-alt text-base"></i> Git</span>
-                <span class="px-4 py-2 rounded-lg bg-slate-900 border border-brandBorder text-xs font-mono text-neonCyan flex items-center gap-2"><i class="fa-brands fa-github text-base"></i> GitHub</span>
-            </div>
-        </section>
-
-        <!-- 4. CHRONOLOGICAL EDUCATIONAL TIMELINE -->
-        <section id="education" class="space-y-6">
-            <h2 class="text-lg font-mono text-neonCyan tracking-widest border-b border-brandBorder pb-2">03// CHRONOLOGICAL PATHWAY TRACK</h2>
-            
-            <div class="relative border-l-2 border-brandBorder ml-4 pl-8 space-y-8">
-                <!-- 11th Grade Node -->
-                <div class="relative">
-                    <div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-neonCyan glow-cyan"></div>
-                    <div class="glass-card p-6 rounded-xl border border-brandBorder">
-                        <span class="text-xs font-mono text-neonCyan">CURRENT ENROLLMENT</span>
-                        <h3 class="text-lg font-bold text-white mt-1">11th Grade Science & Technology Track</h3>
-                        <p class="text-xs text-slate-400 font-mono mt-2">Analytical Physics, Computer Science Modules, Network Architecture Logic.</p>
-                    </div>
-                </div>
-
-                <!-- Matriculation Node -->
-                <div class="relative">
-                    <div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-emerald-400 flex items-center justify-center text-[10px] text-black font-bold">✓</div>
-                    <div class="glass-card p-6 rounded-xl border border-brandBorder">
-                        <span class="text-xs font-mono text-emerald-400">VERIFIED CERTIFICATION</span>
-                        <h3 class="text-lg font-bold text-white mt-1">Matriculation Board Degree</h3>
-                        <p class="text-xs text-slate-400 font-mono mt-2">Completed with distinction in Computer Science & Mathematics foundational tracks.</p>
-                    </div>
+                <div class="glass-card p-6 rounded-2xl flex flex-col items-center space-y-3">
+                    <i class="fa-solid fa-shield-halved text-4xl text-indigo-400"></i>
+                    <h3 class="font-semibold text-lg">Cybersecurity</h3>
+                    <p class="text-xs text-slate-400 text-center">Vulnerability scanning & network reconnaissance.</p>
                 </div>
             </div>
         </section>
 
-        <!-- 5. REPOSITORIES SHOWCASE -->
+        <!-- PROJECTS SHOWCASE SECTION -->
         <section id="projects" class="space-y-6">
-            <h2 class="text-lg font-mono text-neonCyan tracking-widest border-b border-brandBorder pb-2">04// REPOSITORIES SHOWCASE</h2>
+            <h2 class="text-2xl font-bold text-gradient inline-block border-b border-purple-500/30 pb-2">Featured Projects</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Project 1 -->
-                <div class="glass-card p-6 rounded-xl border border-brandBorder flex flex-col justify-between space-y-4">
+                <div class="glass-card p-8 rounded-2xl flex flex-col justify-between space-y-4">
                     <div>
-                        <span class="px-2 py-1 rounded bg-alertCrimson/10 border border-alertCrimson/30 text-alertCrimson text-[10px] font-mono">ENTERPRISE VULNERABILITY ASSET</span>
+                        <span class="px-3 py-1 rounded-full text-xs font-medium bg-purple-500/20 text-purple-300 border border-purple-500/30">Security Module</span>
                         <h3 class="text-xl font-bold text-white mt-3">EthicalGuard Scanner Engine</h3>
-                        <p class="text-xs text-slate-400 font-mono mt-2">Native Python decoupled worker scanner for real-time threat auditing and telemetry reporting.</p>
+                        <p class="text-sm text-slate-300 mt-2">Custom decoupled worker vulnerability scanner for real-time threat auditing.</p>
                     </div>
-                    <a href="https://github.com/sidhu00700" target="_blank" class="inline-flex items-center justify-center px-4 py-2 bg-brandBorder hover:bg-neonCyan hover:text-black text-neonCyan font-mono text-xs rounded-lg transition duration-300">
-                        <i class="fa-brands fa-github mr-2"></i> Inspect Shell Source
+                    <a href="https://github.com/sidhu00700" target="_blank" class="inline-flex items-center text-sm font-medium text-purple-400 hover:text-purple-300">
+                        View Code Source <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs"></i>
                     </a>
                 </div>
 
-                <!-- Project 2 -->
-                <div class="glass-card p-6 rounded-xl border border-brandBorder flex flex-col justify-between space-y-4">
+                <div class="glass-card p-8 rounded-2xl flex flex-col justify-between space-y-4">
                     <div>
-                        <span class="px-2 py-1 rounded bg-neonCyan/10 border border-neonCyan/30 text-neonCyan text-[10px] font-mono">PUBLIC NETWORK UTILITY</span>
+                        <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-500/20 text-blue-300 border border-blue-500/30">Network Utility</span>
                         <h3 class="text-xl font-bold text-white mt-3">Autonomous Video Downloader</h3>
-                        <p class="text-xs text-slate-400 font-mono mt-2">High-speed media extraction server utilizing custom yt-dlp Python wrappers with proxy routing.</p>
+                        <p class="text-sm text-slate-300 mt-2">Media extraction utility built using custom yt-dlp wrappers and proxy routing.</p>
                     </div>
-                    <a href="https://github.com/sidhu00700" target="_blank" class="inline-flex items-center justify-center px-4 py-2 bg-brandBorder hover:bg-neonCyan hover:text-black text-neonCyan font-mono text-xs rounded-lg transition duration-300">
-                        <i class="fa-brands fa-github mr-2"></i> Inspect Shell Source
+                    <a href="https://github.com/sidhu00700" target="_blank" class="inline-flex items-center text-sm font-medium text-purple-400 hover:text-purple-300">
+                        View Code Source <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs"></i>
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- 6. UNIX SHELL CONSOLE SANDBOX WIDGET -->
-        <section id="terminal-section" class="space-y-6">
-            <h2 class="text-lg font-mono text-neonCyan tracking-widest border-b border-brandBorder pb-2">05// INTERACTIVE UNIX TERMINAL UTILITY</h2>
-            
-            <div class="glass-card rounded-xl border border-brandBorder overflow-hidden font-mono text-xs">
-                <div class="bg-slate-900 px-4 py-2 border-b border-brandBorder flex items-center justify-between text-slate-400">
-                    <div class="flex space-x-2">
-                        <span class="w-3 h-3 rounded-full bg-alertCrimson inline-block"></span>
-                        <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
-                        <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
-                    </div>
-                    <span>guest@ahmedsidhu:~# (Interactive Terminal)</span>
-                </div>
-                <div id="terminal-screen" class="p-4 h-56 overflow-y-auto space-y-2 text-slate-300">
-                    <div class="text-neonCyan">SYSTEM ENGINE CORE ONLINE. Type 'help' to inspect commands.</div>
-                </div>
-                <div class="p-3 bg-slate-950 border-t border-brandBorder flex items-center space-x-2">
-                    <span class="text-emerald-400 font-bold">guest@ahmedsidhu:~#</span>
-                    <input type="text" id="terminal-input" class="bg-transparent border-none outline-none text-neonCyan font-mono w-full" placeholder="Type command..." autocomplete="off">
-                </div>
-            </div>
-        </section>
-
-        <!-- 7. APP-CENTRIC SOCIAL BRANDING LOGOS -->
-        <section id="socials" class="space-y-6">
-            <h2 class="text-lg font-mono text-neonCyan tracking-widest border-b border-brandBorder pb-2 text-center">06// CONNECT & NETWORK SOCKETS</h2>
-            
-            <div class="flex justify-center items-center space-x-8 py-6">
-                <!-- GitHub Logo Button -->
-                <a href="https://github.com/sidhu00700" target="_blank" class="p-6 rounded-2xl glass-card border border-brandBorder hover:border-neonCyan text-slate-300 hover:text-neonCyan transform hover:-translate-y-2 transition duration-300 text-4xl shadow-lg hover:shadow-neonCyan/20">
+        <!-- SOCIAL CONNECT LOGO BUTTONS -->
+        <section id="connect" class="space-y-6 text-center">
+            <h2 class="text-2xl font-bold text-gradient inline-block border-b border-purple-500/30 pb-2">Let's Connect</h2>
+            <div class="flex justify-center items-center space-x-6 py-6">
+                <a href="https://github.com/sidhu00700" target="_blank" class="p-6 rounded-2xl glass-card hover:border-purple-500 text-slate-300 hover:text-purple-400 transition transform hover:-translate-y-2 text-3xl">
                     <i class="fa-brands fa-github"></i>
                 </a>
-
-                <!-- LinkedIn Logo Button -->
-                <a href="https://www.linkedin.com/in/ahmed-sidhu-5904913aa" target="_blank" class="p-6 rounded-2xl glass-card border border-brandBorder hover:border-neonCyan text-slate-300 hover:text-neonCyan transform hover:-translate-y-2 transition duration-300 text-4xl shadow-lg hover:shadow-neonCyan/20">
-                    <i class="fa-brands fa-linkedin"></i>
+                <a href="https://www.linkedin.com/in/ahmed-sidhu-5904913aa" target="_blank" class="p-6 rounded-2xl glass-card hover:border-purple-500 text-slate-300 hover:text-purple-400 transition transform hover:-translate-y-2 text-3xl">
+                    <i class="fa-brands fa-linkedin-in"></i>
                 </a>
-
-                <!-- Facebook Logo Button -->
-                <a href="https://www.facebook.com/Ahmedsidhu001" target="_blank" class="p-6 rounded-2xl glass-card border border-brandBorder hover:border-neonCyan text-slate-300 hover:text-neonCyan transform hover:-translate-y-2 transition duration-300 text-4xl shadow-lg hover:shadow-neonCyan/20">
-                    <i class="fa-brands fa-facebook"></i>
+                <a href="https://www.facebook.com/Ahmedsidhu001" target="_blank" class="p-6 rounded-2xl glass-card hover:border-purple-500 text-slate-300 hover:text-purple-400 transition transform hover:-translate-y-2 text-3xl">
+                    <i class="fa-brands fa-facebook-f"></i>
                 </a>
             </div>
         </section>
 
     </main>
 
-    <!-- FOOTER HUB -->
-    <footer class="border-t border-brandBorder py-6 text-center font-mono text-xs text-slate-500">
-        &copy; 2026 AHMED SHABBIR (ALIAS // AHMED SIDHU) // ALL RIGHTS RESERVED
+    <!-- FOOTER -->
+    <footer class="border-t border-white/10 py-6 text-center text-xs text-slate-400">
+        &copy; 2026 AHMED SHABBIR (ALIAS // AHMED SIDHU). ALL RIGHTS RESERVED.
     </footer>
 
-    <!-- SCRIPT RUNTIME ENGINE -->
-    <script>
-        // TYPEWRITER ENGINE
-        const typewriterElement = document.getElementById('typewriter');
-        const textToType = "Hi, I am Ahmed Sidhu";
-        let charIndex = 0;
-
-        function typeEffect() {
-            if (charIndex < textToType.length) {
-                typewriterElement.innerHTML += textToType.charAt(charIndex);
-                charIndex++;
-                setTimeout(typeEffect, 100);
-            }
-        }
-        typeEffect();
-
-        // TELEMETRY PUSH DUMP
-        const telemetryLogs = [
-            "[OK] PACKET ROUTE VERIFIED: 192.168.1.1",
-            "[SYSTEM] CONTINUOUS DEPLOYMENT ENGINE ACTIVE",
-            "[SECURITY] NO THREAT VECTORS DETECTED ON PORT 443",
-            "[TELEMETRY] MICROSERVICES LATENCY: 12ms",
-            "[LOG] USER AUDIT SESSION VALIDATED"
-        ];
-        let telemetryIndex = 0;
-        setInterval(() => {
-            document.getElementById('live-telemetry-log').innerText = telemetryLogs[telemetryIndex];
-            telemetryIndex = (telemetryIndex + 1) % telemetryLogs.length;
-        }, 3000);
-
-        // INTERACTIVE TERMINAL ENGINE
-        const termInput = document.getElementById('terminal-input');
-        const termScreen = document.getElementById('terminal-screen');
-
-        termInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const cmd = termInput.value.trim().toLowerCase();
-                appendTermLine(`guest@ahmedsidhu:~# ${cmd}`, 'text-emerald-400');
-
-                switch (cmd) {
-                    case 'help':
-                        appendTermLine('COMMANDS: help, about, skills, sysinfo, clear', 'text-neonCyan');
-                        break;
-                    case 'about':
-                        appendTermLine('IDENTITY: Ahmed Shabbir (Alias: Ahmed Sidhu)', 'text-slate-300');
-                        appendTermLine('TRACK: 11th Grade Science & Cybersecurity Practitioner', 'text-slate-300');
-                        break;
-                    case 'skills':
-                        appendTermLine('CORE: Python, Full-Stack Development, Network Automation', 'text-neonCyan');
-                        break;
-                    case 'sysinfo':
-                        appendTermLine('SYSTEM: B2B SaaS Dashboard v2026.4 [Production]', 'text-emerald-400');
-                        break;
-                    case 'clear':
-                        termScreen.innerHTML = '';
-                        break;
-                    default:
-                        appendTermLine(`ERR // Parameter Not Indexed: '${cmd}'`, 'text-alertCrimson');
-                }
-
-                termInput.value = '';
-                termScreen.scrollTop = termScreen.scrollHeight;
-            }
-        });
-
-        function appendTermLine(text, cssClass) {
-            const div = document.createElement('div');
-            div.className = cssClass;
-            div.innerText = text;
-            termScreen.appendChild(div);
-        }
-    </script>
 </body>
 </html>
