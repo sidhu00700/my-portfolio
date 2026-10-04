@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -26,18 +27,31 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* FULL BACKGROUND BLURRED PHOTO (profile.png) */
-        body {
+        /* DARK MODE BACKGROUND */
+        html.dark body {
             background: linear-gradient(to bottom, rgba(11, 12, 16, 0.88), rgba(15, 23, 42, 0.92)), url('profile.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             color: #f8fafc;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
-        /* HIGH-END GLASSMORPHISM CARDS */
-        .glass-card {
+        /* LIGHT MODE BACKGROUND */
+        html:not(.dark) body {
+            background: linear-gradient(to bottom, rgba(241, 245, 249, 0.92), rgba(226, 232, 240, 0.95)), url('profile.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #0f172a;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* GLASSMORPHISM CARDS - DARK */
+        html.dark .glass-card {
             background: rgba(15, 23, 42, 0.55);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -45,15 +59,31 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
-        /* STICKY GLASS NAVBAR WITH BACKDROP BLUR */
-        .sticky-glass-nav {
+        /* GLASSMORPHISM CARDS - LIGHT */
+        html:not(.dark) .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
+        }
+
+        /* STICKY GLASS NAVBAR */
+        html.dark .sticky-glass-nav {
             background: rgba(11, 12, 16, 0.65);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* GLOWING PURPLE TEXT ACCENT */
+        html:not(.dark) .sticky-glass-nav {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        /* GLOWING TEXT ACCENT */
         .text-gradient {
             background: linear-gradient(135deg, #a855f7 0%, #3b82f6 100%);
             -webkit-background-clip: text;
@@ -70,7 +100,7 @@
             transform: translateY(-2px);
         }
 
-        /* GOL DAIRE (HERO CIRCLE IMAGE USING profile.png) */
+        /* HERO CIRCLE FRAME */
         .hero-img-circle {
             width: 320px;
             height: 320px;
@@ -85,23 +115,29 @@
 </head>
 <body class="min-h-screen selection:bg-purple-500 selection:text-white">
 
-    <!-- STICKY GLASSMORPHIC NAVBAR WITH MINIMALIST TEXT LOGO -->
+    <!-- STICKY NAVBAR WITH LOGO & DARK/LIGHT TOGGLE -->
     <header class="sticky top-0 z-50 sticky-glass-nav px-8 py-4 flex justify-between items-center">
         <div class="flex items-center space-x-2">
-            <!-- Developer Style Minimalist Text Logo -->
             <a href="#home" class="text-2xl font-mono font-extrabold tracking-wide text-gradient">
                 &lt;AhmedSidhu /&gt;
             </a>
         </div>
         
-        <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
-            <a href="#home" class="hover:text-purple-400 transition">Home</a>
-            <a href="#about" class="hover:text-purple-400 transition">About</a>
-            <a href="#experience" class="hover:text-purple-400 transition">Experience</a>
-            <a href="#skills" class="hover:text-purple-400 transition">Skills</a>
-            <a href="#projects" class="hover:text-purple-400 transition">Projects</a>
-            <a href="#connect" class="hover:text-purple-400 transition">Contact</a>
-        </nav>
+        <div class="flex items-center space-x-6">
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium dark:text-slate-300 text-slate-700">
+                <a href="#home" class="hover:text-purple-500 transition">Home</a>
+                <a href="#about" class="hover:text-purple-500 transition">About</a>
+                <a href="#experience" class="hover:text-purple-500 transition">Experience</a>
+                <a href="#skills" class="hover:text-purple-500 transition">Skills</a>
+                <a href="#projects" class="hover:text-purple-500 transition">Projects</a>
+                <a href="#connect" class="hover:text-purple-500 transition">Contact</a>
+            </nav>
+
+            <!-- DARK / LIGHT MODE TOGGLE BUTTON -->
+            <button id="theme-toggle" class="p-2.5 rounded-full glass-card dark:text-yellow-400 text-slate-700 hover:scale-110 transition">
+                <i id="theme-icon" class="fa-solid fa-sun text-lg"></i>
+            </button>
+        </div>
     </header>
 
     <main class="max-w-6xl mx-auto px-6 py-12 space-y-24">
@@ -112,36 +148,35 @@
                 <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">
                     Hi, I'm <span class="text-gradient">Ahmed Sidhu</span>
                 </h1>
-                <h2 class="text-xl md:text-2xl font-semibold text-slate-200">
+                <h2 class="text-xl md:text-2xl font-semibold dark:text-slate-200 text-slate-800">
                     Junior Full-Stack Developer & Cybersecurity Practitioner
                 </h2>
-                <p class="text-slate-300 text-base leading-relaxed max-w-xl">
+                <p class="dark:text-slate-300 text-slate-600 text-base leading-relaxed max-w-xl">
                     I build exceptional digital experiences that are fast, secure, and visually appealing. Specialized in modern web architectures, decoupled microservices, and continuous automated security protocols.
                 </p>
                 
                 <div class="flex items-center space-x-4 pt-2">
                     <a href="#projects" class="btn-gradient px-6 py-3 rounded-full text-white font-medium text-sm">View Work</a>
-                    <a href="#connect" class="px-6 py-3 rounded-full border border-purple-500/40 hover:bg-purple-500/10 text-purple-300 font-medium text-sm transition">Connect</a>
+                    <a href="#connect" class="px-6 py-3 rounded-full border border-purple-500/40 hover:bg-purple-500/10 text-purple-600 dark:text-purple-300 font-medium text-sm transition">Connect</a>
                 </div>
 
                 <!-- SOCIAL LOGO ICONS -->
                 <div class="flex items-center space-x-4 pt-4">
-                    <a href="https://github.com/sidhu00700" target="_blank" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-slate-300 hover:text-purple-400 hover:border-purple-500/50 transition">
+                    <a href="https://github.com/sidhu00700" target="_blank" class="w-10 h-10 rounded-full glass-card flex items-center justify-center dark:text-slate-300 text-slate-700 hover:text-purple-500 transition">
                         <i class="fa-brands fa-github text-lg"></i>
                     </a>
-                    <a href="https://www.linkedin.com/in/ahmed-sidhu-5904913aa" target="_blank" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-slate-300 hover:text-purple-400 hover:border-purple-500/50 transition">
+                    <a href="https://www.linkedin.com/in/ahmed-sidhu-5904913aa" target="_blank" class="w-10 h-10 rounded-full glass-card flex items-center justify-center dark:text-slate-300 text-slate-700 hover:text-purple-500 transition">
                         <i class="fa-brands fa-linkedin-in text-lg"></i>
                     </a>
-                    <a href="https://www.facebook.com/Ahmedsidhu001" target="_blank" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-slate-300 hover:text-purple-400 hover:border-purple-500/50 transition">
+                    <a href="https://www.facebook.com/Ahmedsidhu001" target="_blank" class="w-10 h-10 rounded-full glass-card flex items-center justify-center dark:text-slate-300 text-slate-700 hover:text-purple-500 transition">
                         <i class="fa-brands fa-facebook-f text-lg"></i>
                     </a>
-                    <a href="https://x.com/AHMEDSIDHU001" target="_blank" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-slate-300 hover:text-purple-400 hover:border-purple-500/50 transition">
+                    <a href="https://x.com/AHMEDSIDHU001" target="_blank" class="w-10 h-10 rounded-full glass-card flex items-center justify-center dark:text-slate-300 text-slate-700 hover:text-purple-500 transition">
                         <i class="fa-brands fa-x-twitter text-lg"></i>
                     </a>
                 </div>
             </div>
 
-            <!-- GOL DAIRE MEIN PHOTO WALA FRAME -->
             <div class="flex justify-center items-center">
                 <div class="hero-img-circle"></div>
             </div>
@@ -151,78 +186,76 @@
         <section id="about" class="space-y-6">
             <h2 class="text-2xl font-bold text-gradient inline-block border-b border-purple-500/30 pb-2">About Me</h2>
             <div class="glass-card p-8 rounded-2xl space-y-4">
-                <p class="text-slate-200 text-base leading-relaxed">
+                <p class="dark:text-slate-200 text-slate-800 text-base leading-relaxed">
                     Junior Full-Stack Engineer // Autonomous Systems & Security
                 </p>
-                <blockquote class="italic text-slate-300 border-l-4 border-purple-500 pl-4 py-1">
+                <blockquote class="italic dark:text-slate-300 text-slate-600 border-l-4 border-purple-500 pl-4 py-1">
                     "Building resilient web applications integrated with decentralized workers, real-time data telemetry, and continuous offensive security auditing."
                 </blockquote>
             </div>
         </section>
 
-        <!-- WORK & FREELANCE EXPERIENCE TIMELINE SECTION -->
+        <!-- EXPERIENCE TIMELINE SECTION -->
         <section id="experience" class="space-y-6">
             <h2 class="text-2xl font-bold text-gradient inline-block border-b border-purple-500/30 pb-2">Experience & Timeline</h2>
             
             <div class="relative border-l-2 border-purple-500/30 ml-4 pl-8 space-y-8">
-                <!-- Timeline Item 1 -->
                 <div class="relative">
-                    <div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-purple-500 border-4 border-slate-900"></div>
+                    <div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-purple-500 border-4 dark:border-slate-900 border-slate-100"></div>
                     <div class="glass-card p-6 rounded-2xl space-y-2">
-                        <span class="text-xs font-mono text-purple-400">2026 - PRESENT</span>
-                        <h3 class="text-lg font-bold text-white">Freelance Full-Stack & Automation Developer</h3>
-                        <p class="text-sm text-slate-300">Building custom web applications, Python automation bots, and API integration services for clients globally.</p>
+                        <span class="text-xs font-mono text-purple-500 font-semibold">2026 - PRESENT</span>
+                        <h3 class="text-lg font-bold dark:text-white text-slate-900">Freelance Full-Stack & Automation Developer</h3>
+                        <p class="text-sm dark:text-slate-300 text-slate-600">Building custom web applications, Python automation bots, and API integration services for clients globally.</p>
                     </div>
                 </div>
 
-                <!-- Timeline Item 2 -->
                 <div class="relative">
-                    <div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-blue-500 border-4 border-slate-900"></div>
+                    <div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-blue-500 border-4 dark:border-slate-900 border-slate-100"></div>
                     <div class="glass-card p-6 rounded-2xl space-y-2">
-                        <span class="text-xs font-mono text-blue-400">2024 - 2025</span>
-                        <h3 class="text-lg font-bold text-white">Cybersecurity & Network Lab Researcher</h3>
-                        <p class="text-sm text-slate-300">Conducting hands-on vulnerability analysis, web app security audits, and threat intelligence experiments.</p>
+                        <span class="text-xs font-mono text-blue-500 font-semibold">2024 - 2025</span>
+                        <h3 class="text-lg font-bold dark:text-white text-slate-900">Cybersecurity & Network Lab Researcher</h3>
+                        <p class="text-sm dark:text-slate-300 text-slate-600">Conducting hands-on vulnerability analysis, web app security audits, and threat intelligence experiments.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SKILLS SECTION WITH VISUAL LOGO CARDS -->
+        <!-- TECHNICAL SKILLS SECTION -->
         <section id="skills" class="space-y-6">
             <h2 class="text-2xl font-bold text-gradient inline-block border-b border-purple-500/30 pb-2">Technical Skills</h2>
             
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
                 <div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center space-y-3 hover:border-purple-500/50 transition">
-                    <i class="fa-brands fa-python text-5xl text-yellow-400"></i>
-                    <span class="font-medium text-sm text-slate-200">Python</span>
+                    <i class="fa-brands fa-python text-5xl text-yellow-500"></i>
+                    <span class="font-medium text-sm dark:text-slate-200 text-slate-800">Python</span>
                 </div>
                 <div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center space-y-3 hover:border-purple-500/50 transition">
-                    <i class="fa-brands fa-js text-5xl text-yellow-300"></i>
-                    <span class="font-medium text-sm text-slate-200">JavaScript</span>
+                    <i class="fa-brands fa-js text-5xl text-yellow-500"></i>
+                    <span class="font-medium text-sm dark:text-slate-200 text-slate-800">JavaScript</span>
                 </div>
                 <div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center space-y-3 hover:border-purple-500/50 transition">
                     <i class="fa-brands fa-html5 text-5xl text-orange-500"></i>
-                    <span class="font-medium text-sm text-slate-200">HTML5</span>
+                    <span class="font-medium text-sm dark:text-slate-200 text-slate-800">HTML5</span>
                 </div>
                 <div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center space-y-3 hover:border-purple-500/50 transition">
                     <i class="fa-brands fa-css3-alt text-5xl text-blue-500"></i>
-                    <span class="font-medium text-sm text-slate-200">CSS3</span>
+                    <span class="font-medium text-sm dark:text-slate-200 text-slate-800">CSS3</span>
                 </div>
                 <div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center space-y-3 hover:border-purple-500/50 transition">
                     <i class="fa-brands fa-java text-5xl text-red-500"></i>
-                    <span class="font-medium text-sm text-slate-200">Java</span>
+                    <span class="font-medium text-sm dark:text-slate-200 text-slate-800">Java</span>
                 </div>
                 <div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center space-y-3 hover:border-purple-500/50 transition">
-                    <i class="fa-solid fa-shield-halved text-5xl text-indigo-400"></i>
-                    <span class="font-medium text-sm text-slate-200">Security</span>
+                    <i class="fa-solid fa-shield-halved text-5xl text-indigo-500"></i>
+                    <span class="font-medium text-sm dark:text-slate-200 text-slate-800">Security</span>
                 </div>
                 <div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center space-y-3 hover:border-purple-500/50 transition">
-                    <i class="fa-brands fa-github text-5xl text-slate-100"></i>
-                    <span class="font-medium text-sm text-slate-200">GitHub</span>
+                    <i class="fa-brands fa-github text-5xl dark:text-slate-100 text-slate-800"></i>
+                    <span class="font-medium text-sm dark:text-slate-200 text-slate-800">GitHub</span>
                 </div>
                 <div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center space-y-3 hover:border-purple-500/50 transition">
-                    <i class="fa-brands fa-figma text-5xl text-pink-400"></i>
-                    <span class="font-medium text-sm text-slate-200">UI / Design</span>
+                    <i class="fa-brands fa-figma text-5xl text-pink-500"></i>
+                    <span class="font-medium text-sm dark:text-slate-200 text-slate-800">UI / Design</span>
                 </div>
             </div>
         </section>
@@ -232,9 +265,8 @@
             <h2 class="text-2xl font-bold text-gradient inline-block border-b border-purple-500/30 pb-2">Featured Projects (Live from GitHub)</h2>
             
             <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Dynamic Content Loaded via JS -->
-                <div class="glass-card p-8 rounded-2xl col-span-full text-center text-slate-400 py-12">
-                    <i class="fa-solid fa-spinner fa-spin text-3xl mb-3 text-purple-400"></i>
+                <div class="glass-card p-8 rounded-2xl col-span-full text-center dark:text-slate-400 text-slate-600 py-12">
+                    <i class="fa-solid fa-spinner fa-spin text-3xl mb-3 text-purple-500"></i>
                     <p>Fetching projects dynamically from GitHub...</p>
                 </div>
             </div>
@@ -244,16 +276,16 @@
         <section id="connect" class="space-y-6 text-center">
             <h2 class="text-2xl font-bold text-gradient inline-block border-b border-purple-500/30 pb-2">Let's Connect</h2>
             <div class="flex justify-center items-center space-x-6 py-6">
-                <a href="https://github.com/sidhu00700" target="_blank" class="p-6 rounded-2xl glass-card hover:border-purple-500 text-slate-300 hover:text-purple-400 transition transform hover:-translate-y-2 text-3xl">
+                <a href="https://github.com/sidhu00700" target="_blank" class="p-6 rounded-2xl glass-card hover:border-purple-500 dark:text-slate-300 text-slate-700 hover:text-purple-500 transition transform hover:-translate-y-2 text-3xl">
                     <i class="fa-brands fa-github"></i>
                 </a>
-                <a href="https://www.linkedin.com/in/ahmed-sidhu-5904913aa" target="_blank" class="p-6 rounded-2xl glass-card hover:border-purple-500 text-slate-300 hover:text-purple-400 transition transform hover:-translate-y-2 text-3xl">
+                <a href="https://www.linkedin.com/in/ahmed-sidhu-5904913aa" target="_blank" class="p-6 rounded-2xl glass-card hover:border-purple-500 dark:text-slate-300 text-slate-700 hover:text-purple-500 transition transform hover:-translate-y-2 text-3xl">
                     <i class="fa-brands fa-linkedin-in"></i>
                 </a>
-                <a href="https://www.facebook.com/Ahmedsidhu001" target="_blank" class="p-6 rounded-2xl glass-card hover:border-purple-500 text-slate-300 hover:text-purple-400 transition transform hover:-translate-y-2 text-3xl">
+                <a href="https://www.facebook.com/Ahmedsidhu001" target="_blank" class="p-6 rounded-2xl glass-card hover:border-purple-500 dark:text-slate-300 text-slate-700 hover:text-purple-500 transition transform hover:-translate-y-2 text-3xl">
                     <i class="fa-brands fa-facebook-f"></i>
                 </a>
-                <a href="https://x.com/AHMEDSIDHU001" target="_blank" class="p-6 rounded-2xl glass-card hover:border-purple-500 text-slate-300 hover:text-purple-400 transition transform hover:-translate-y-2 text-3xl">
+                <a href="https://x.com/AHMEDSIDHU001" target="_blank" class="p-6 rounded-2xl glass-card hover:border-purple-500 dark:text-slate-300 text-slate-700 hover:text-purple-500 transition transform hover:-translate-y-2 text-3xl">
                     <i class="fa-brands fa-x-twitter"></i>
                 </a>
             </div>
@@ -262,12 +294,40 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="border-t border-white/10 py-6 text-center text-xs text-slate-400">
+    <footer class="border-t border-slate-500/20 py-6 text-center text-xs dark:text-slate-400 text-slate-600">
         &copy; 2026 AHMED SHABBIR ( AHMED SIDHU). ALL RIGHTS RESERVED.
     </footer>
 
-    <!-- AUTOMATIC GITHUB FETCH SCRIPT -->
+    <!-- TOGGLE LOGIC & GITHUB FETCH SCRIPT -->
     <script>
+        // DARK / LIGHT MODE TOGGLE SCRIPT
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        // Check LocalStorage or default to dark
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        if (currentTheme === 'light') {
+            htmlElement.classList.remove('dark');
+            themeIcon.className = 'fa-solid fa-moon text-lg text-slate-700';
+        } else {
+            htmlElement.classList.add('dark');
+            themeIcon.className = 'fa-solid fa-sun text-lg text-yellow-400';
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeIcon.className = 'fa-solid fa-moon text-lg text-slate-700';
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.className = 'fa-solid fa-sun text-lg text-yellow-400';
+            }
+        });
+
+        // AUTOMATIC GITHUB FETCH SCRIPT
         const username = 'sidhu00700';
         const projectsContainer = document.getElementById('projects-container');
 
@@ -278,17 +338,16 @@
 
                 if (!Array.isArray(repos) || repos.length === 0) {
                     projectsContainer.innerHTML = `
-                        <div class="glass-card p-8 rounded-2xl col-span-full text-center text-slate-400">
+                        <div class="glass-card p-8 rounded-2xl col-span-full text-center dark:text-slate-400 text-slate-600">
                             No public repositories found.
                         </div>
                     `;
                     return;
                 }
 
-                projectsContainer.innerHTML = ''; // Clear loading spinner
+                projectsContainer.innerHTML = '';
 
                 repos.forEach(repo => {
-                    // Skip profile repository if same as username
                     if (repo.name.toLowerCase() === username.toLowerCase()) return;
 
                     const hasLiveDemo = repo.homepage && repo.homepage.trim() !== '';
@@ -298,18 +357,18 @@
 
                     card.innerHTML = `
                         <div>
-                            <span class="px-3 py-1 rounded-full text-xs font-medium bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                            <span class="px-3 py-1 rounded-full text-xs font-medium bg-purple-500/20 text-purple-600 dark:text-purple-300 border border-purple-500/30">
                                 ${repo.language || 'Repository'}
                             </span>
-                            <h3 class="text-xl font-bold text-white mt-3">${repo.name}</h3>
-                            <p class="text-sm text-slate-300 mt-2">${repo.description || 'No description provided.'}</p>
+                            <h3 class="text-xl font-bold dark:text-white text-slate-900 mt-3">${repo.name}</h3>
+                            <p class="text-sm dark:text-slate-300 text-slate-600 mt-2">${repo.description || 'No description provided.'}</p>
                         </div>
                         <div class="flex items-center space-x-4 pt-2">
-                            <a href="${repo.html_url}" target="_blank" class="inline-flex items-center text-sm font-medium text-purple-400 hover:text-purple-300">
+                            <a href="${repo.html_url}" target="_blank" class="inline-flex items-center text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-500">
                                 <i class="fa-brands fa-github mr-2"></i> View Code
                             </a>
                             ${hasLiveDemo ? `
-                                <a href="${repo.homepage}" target="_blank" class="inline-flex items-center text-sm font-medium px-4 py-2 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/40 hover:bg-purple-500/30 transition">
+                                <a href="${repo.homepage}" target="_blank" class="inline-flex items-center text-sm font-medium px-4 py-2 rounded-lg bg-purple-500/20 text-purple-600 dark:text-purple-300 border border-purple-500/40 hover:bg-purple-500/30 transition">
                                     <i class="fa-solid fa-arrow-up-right-from-square mr-2 text-xs"></i> Live Demo
                                 </a>
                             ` : ''}
@@ -320,7 +379,7 @@
 
             } catch (error) {
                 projectsContainer.innerHTML = `
-                    <div class="glass-card p-8 rounded-2xl col-span-full text-center text-red-400">
+                    <div class="glass-card p-8 rounded-2xl col-span-full text-center text-red-500">
                         Failed to load projects from GitHub. Please check your network connection.
                     </div>
                 `;
