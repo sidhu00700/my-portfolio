@@ -1,0 +1,31 @@
+# Operating System Caches & Junk
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Vercel & Deployment Cache
+.vercel
+.output
+
+# Node & Package Managers
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python Local Virtual Environments & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.production
